@@ -140,3 +140,21 @@ async def connections(client,message):
             reply_markup=InlineKeyboardMarkup(buttons),
             quote=True
         )
+        
+@trojanz.on_message(filters.private & filters.command("broadcast"))
+
+async def broadcast_handler_open(_, m):
+
+    if m.from_user.id not in ADMIN_ID:
+
+        await m.delete()
+
+        return
+
+    if m.reply_to_message is None:
+
+        await m.delete()
+
+    else:
+
+        await broadcast(m, db)        
